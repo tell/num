@@ -6,6 +6,9 @@
   - include/
   - src/
   - bench/
-    
-    Benchmarking.
+
+* Requirements
+
+  - gcc 4.6.1
+  - boost 1.47.0
 

@@ -1,4 +1,4 @@
-/* -*- mode: c++; mode: flymake; coding: utf-8-unix -*- */
+/* -*- mode: c++; coding: utf-8-unix -*- */
 /*
   Copyright (c) 2011-2011 Tadanori TERUYA (tell) <tadanori.teruya@gmail.com>
 
@@ -1002,8 +1002,45 @@ void info_gmp()
        << "number of bits in mp_limb is " << mp_bits_per_limb << endl;
 }
 
-void gen_bench_for_gnuplot()
+void test_all()
 {
+  using namespace std;
+  using namespace mpint;
+
+  MPInt::codeGen(0);
+
+  test_mpint();
+  test_mpint_NTZ();
+  test_mpint_shr();
+  test_mpint_sub();
+  test_mpint_kronecker();
+
+  cout.flush();
+
+  MPInt::codeGen(1);
+
+  test_mpint();
+  test_mpint_NTZ();
+  test_mpint_shr();
+  test_mpint_sub();
+  test_mpint_kronecker();
+
+  cout.flush();
+
+  MPInt::codeGen();
+
+  test_mpint();
+  test_mpint_NTZ();
+  test_mpint_shr();
+  test_mpint_sub();
+  test_mpint_kronecker();
+
+  cout.flush();
+}
+
+void bench_for_gnuplot()
+{
+  using namespace std;
   using namespace mpint;
 
   MPInt::codeGen(0);
@@ -1012,13 +1049,13 @@ void gen_bench_for_gnuplot()
   bench_sub();
   bench_kronecker();
 
-  MPInt::codeGen();
+  MPInt::codeGen(1);
   bench_NTZ();
   bench_shr();
   bench_sub();
   bench_kronecker();
 
-  MPInt::codeGen(1);
+  MPInt::codeGen();
   bench_NTZ();
   bench_shr();
   bench_sub();
@@ -1038,37 +1075,9 @@ int main()
   info_gmp();
   MPIntCodeGen();
 
-  MPInt::codeGen(0);
+  test_all();
 
-  test_mpint();
-  test_mpint_NTZ();
-  test_mpint_shr();
-  test_mpint_sub();
-  test_mpint_kronecker();
-
-  cout.flush();
-
-  MPInt::codeGen(1);
-
-  test_mpint();
-  test_mpint_NTZ();
-  test_mpint_shr();
-  test_mpint_sub();
-  test_mpint_kronecker();
-
-  cout.flush();
-
-  MPInt::codeGen();
-
-  test_mpint();
-  test_mpint_NTZ();
-  test_mpint_shr();
-  test_mpint_sub();
-  test_mpint_kronecker();
-
-  cout.flush();
-
-  gen_bench_for_gnuplot();
+  bench_for_gnuplot();
 
   return testsAreSucceeded() ? 0 : 1;
 }

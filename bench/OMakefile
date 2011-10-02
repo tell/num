@@ -1,0 +1,12 @@
+
+INCLUDES[] +=
+	../xbyak
+	../include
+
+LDFLAGS += -lgmp -lgmpxx
+
+LIBS += ../lib/libint
+
+CProgram(kronecker-jacobi, kronecker-jacobi)
+
+.DEFAULT: kronecker-jacobi$(EXE)

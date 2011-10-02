@@ -1,0 +1,13 @@
+*~
+*.swp
+
+.#*
+
+.omakedb*
+*.omc
+
+lib/
+uncommited/
+
+*.o
+

@@ -1,0 +1,11 @@
+
+LIBFILES[] =
+	kronecker-jacobi_bench
+	kronecker-binary
+	kronecker-binary_long
+	kronecker-jacobi
+	mpint
+
+StaticCLibrary(../lib/libint, $(LIBFILES))
+
+.DEFAULT: ../lib/libint.a

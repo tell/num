@@ -1,0 +1,51 @@
+
+.PHONY: all install clean
+
+WARNFLAGS[] =
+	-Wall
+	-Wextra
+	-Wabi
+	-Wformat=2
+	-Wcast-qual
+	-Wcast-align
+	-Wwrite-strings
+	-Wfloat-equal
+	-Wpointer-arith
+	-Wconversion
+#	-Winline
+	-Wfatal-errors
+
+OPTFLAGS[] =
+	-O3
+	-fomit-frame-pointer
+#	--param
+#	inline-unit-growth=1000
+#	--param
+#	max-inline-insns-single=1000
+#	--param
+#	large-function-growth=1000
+#	-funroll-loops
+
+DEBUGFLAGS[] =
+#	-g3
+	-DNDEBUG
+
+RMFLAGS = -f
+
+CC = $(getenv CC)
+CXX = $(getenv CXX)
+
+CXXFLAGS += -std=c++0x -m64 -msse4.2 -pedantic -fno-operator-names \
+	$(WARNFLAGS) $(OPTFLAGS) $(DEBUGFLAGS)
+
+INCLUDES[] +=
+	../xbyak
+	../include
+	../ate/include
+
+LDFLAGS += -m64 -lstdc++
+
+clean:
+	$(RM) *~ *.omc .omakedb*
+
+.SUBDIRS: src bench

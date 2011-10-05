@@ -141,7 +141,7 @@ void MPInt::shr(MPInt& z, const MPInt& x, const size_t n)
   } else {
     assert(x_size > 0);
 
-    if (z.allocated_ < x.allocated_) {
+    if (z.allocated_ < x_size) {
       z.allocated_ = x.allocated_;
       z.d_ptr_.reset(new value_type[z.allocated_]);
     }

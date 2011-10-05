@@ -1,4 +1,4 @@
-/* -*- mode: c++; mode: flymake; coding: utf-8-unix -*- */
+/* -*- mode: c++; coding: utf-8-unix -*- */
 /*
   Copyright (c) 2011-2011 Tadanori TERUYA (tell) <tadanori.teruya@gmail.com>
 

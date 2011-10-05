@@ -169,7 +169,7 @@ void MPInt::shr(MPInt& z, const MPInt& x, const size_t n)
     }
 
     // zero clear.
-    if (z.allocated_ > (size_t)x.sign_size_) {
+    if (z.allocated_ > x_size) {
       for (size_t i = x.allocated_; i < z.allocated_; ++i) {
         z.d_ptr_[i] = 0;
       }

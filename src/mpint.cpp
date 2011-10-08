@@ -1,4 +1,4 @@
-/* -*- mode: c++; mode: flymake; coding: utf-8-unix -*- */
+/* -*- mode: c++; coding: utf-8-unix -*- */
 /*
   Copyright (c) 2011-2011 Tadanori TERUYA (tell) <tadanori.teruya@gmail.com>
 
@@ -141,7 +141,7 @@ void MPInt::shr(MPInt& z, const MPInt& x, const size_t n)
   } else {
     assert(x_size > 0);
 
-    if (z.allocated_ < x.allocated_) {
+    if (z.allocated_ < x_size) {
       z.allocated_ = x.allocated_;
       z.d_ptr_.reset(new value_type[z.allocated_]);
     }
@@ -156,7 +156,10 @@ void MPInt::shr(MPInt& z, const MPInt& x, const size_t n)
     PUT(x.sign_size_);
     PUT(move_shift);
 #endif
-    bool lastIsZero = in_shr_shift(z.d_ptr_.get(), z.d_ptr_.get(), z.sign_size_, move_shift);
+    bool lastIsZero = false;
+    if (move_shift != 0) {
+      lastIsZero = in_shr_shift(z.d_ptr_.get(), z.d_ptr_.get(), z.sign_size_, move_shift);
+    }
 #ifdef INSPECT
     PUT(lastIsZero);
     if (z.sign_size_ > 0) {

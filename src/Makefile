@@ -6,14 +6,14 @@ MKDIRFLAGS = -p
 OBJFILES = kronecker-binary.o kronecker-binary_long.o \
 	kronecker-jacobi.o mpint.o
 
-TARGET = ../lib/libint.a
+TARGETs = ../lib/libint.a
 
-all: $(TARGET)
+all: $(TARGETs)
+
+clean:
+	$(RM) *.o $(TARGETs)
 
 ../lib/libint.a: $(OBJFILES)
 	$(MKDIR) $(MKDIRFLAGS) ../lib
 	-$(RM) $@
-	$(AR) $@ $(OBJFILES)
-
-clean:
-	$(RM) *.o $(TARGET)
+	$(AR) $(ARFLAGS) $@ $(OBJFILES)

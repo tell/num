@@ -1,27 +1,28 @@
 
-WARNFLAGS = -Wall -Wextra -Wabi -Wformat=2 -Wcast-qual \
+WARNFLAGS := -Wall -Wextra -Wabi -Wformat=2 -Wcast-qual \
 	-Wcast-align -Wwrite-strings -Wfloat-equal -Wpointer-arith \
 	-Wconversion -Wfatal-errors
 # WARNFLAGS += -Winline
 
-OPTFLAGS = -O3 -fomit-frame-pointer
+OPTFLAGS := -O3 -fomit-frame-pointer
 # OPTFLAGS += --param inline-unit-growth=1000
 # OPTFLAGS += --param max-inline-insns-single=1000
 # OPTFLAGS += --param large-function-growth=1000
 # OPTFLAGS += -funroll-loops
 
-DEBUGFLAGS = -DNDEBUG
+DEBUGFLAGS := -DNDEBUG
 # DEBUGFLAGS +=-g3
 
-INCLUDEFLAGS = -I../xbyak -I../include
+INCLUDEFLAGS := -I../xbyak -I../include
 
-CXXFLAGS += -std=c++11 -m64 -msse4.2 -pedantic \
+CXXFLAGS = -std=c++11 -m64 -msse4.2 -pedantic \
 	-fno-operator-names \
 	$(WARNFLAGS) $(OPTFLAGS) $(DEBUGFLAGS) $(INCLUDEFLAGS)
 
+ifeq ($(sell uname),Darwin)
 CC = $(CXX)
-LDFLAGS = -lstdc++ -lgmp -lgmpxx
+endif
 
-AR = ar r
+LDFLAGS := -lstdc++ -lgmp -lgmpxx
 
 .PHONY: all install clean

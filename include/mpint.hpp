@@ -317,7 +317,7 @@ public:
         while (!t.empty()) {
           size_t remain = std::min((int)t.size(), 8);
           char* endp;
-          uint32_t v = strtoul(&t[t.size() - remain], &endp, 16);
+          uint32_t v = (uint32_t) strtoul(&t[t.size() - remain], &endp, 16);
           if (*endp) throw std::invalid_argument("bad hex str");
           x.push_back(v);
           t = t.substr(0, t.size() - remain);

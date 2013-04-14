@@ -15,7 +15,7 @@ DEBUGFLAGS := -DNDEBUG
 
 INCLUDEFLAGS := -I../xbyak -I../include
 
-CXXFLAGS = -std=c++11 -m64 -msse4.2 -pedantic \
+CXXFLAGS = -std=c++11 -stdlib=libc++ -m64 -msse4.2 -pedantic \
 	-fno-operator-names \
 	$(WARNFLAGS) $(OPTFLAGS) $(DEBUGFLAGS) $(INCLUDEFLAGS)
 
@@ -24,5 +24,8 @@ CC = $(CXX)
 endif
 
 LDFLAGS := -lstdc++ -lgmp -lgmpxx
+
+MAKEDEPEND := makedepend
+MAKEDEPENDFLAGS = -mv -Y. -- $(CFLAGS) $(CXXFLAGS) -- *.c *.cpp
 
 .PHONY: all install clean

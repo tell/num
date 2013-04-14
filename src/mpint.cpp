@@ -34,10 +34,14 @@
 
 namespace mpint {
 
+/*
 static inline size_t emu_in_NumTrailZero1_bsfq(const MPInt::value_type x)
 {
+#ifdef __GNUC__
   return __bsfq(x);
+#endif
 }
+*/
 
 static inline size_t emu_in_NumTrailZero1_popcnt(const MPInt::value_type x)
 {
@@ -97,8 +101,8 @@ static inline void shr_SIMD(MPInt::value_type* const z, const MPInt::value_type*
 
   const size_t q = N >> 3;
   const size_t r = N & 7;
-  __m128i* vz = z;
-  __m128i* vx = x;
+  __m128i* vz = (__m128i*) z;
+  __m128i* vx = (__m128i*) x;
 
   /*
     shift right if N >= 8.
@@ -300,8 +304,8 @@ void MPInt::sub(MPInt& z, const MPInt& in_x, const MPInt& in_y)
 */
 
 MPInt::in_prop_op MPInt::in_NumTrailZero1 =
-  emu_in_NumTrailZero1_bsfq;
-  // emu_in_NumTrailZero1_popcnt;
+  // emu_in_NumTrailZero1_bsfq;
+  emu_in_NumTrailZero1_popcnt;
 MPInt::in_shift_op MPInt::in_shr_shift = emu_in_shr_shift;
 MPInt::in_bin_op MPInt::in_sub_nc = emu_in_sub_nc;
 
